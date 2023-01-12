@@ -23,7 +23,7 @@ def plot_V(V):
 if __name__ == '__main__':
 
     env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=False)
-    params = Params(epsilon=0.8)
+    params = Params(epsilon=0.1)
     nb_episodes = 1000
     agent = QTDAgent(env=env, params=params)
     for _ in range(nb_episodes):

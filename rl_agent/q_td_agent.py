@@ -17,8 +17,8 @@ class QTDAgent:
         if random.random() < self.params.epsilon:
             return self.env.action_space.sample()
         else:
-            # return np.random.choice(np.flatnonzero(self.Q[state] == self.Q[state].max()))
-            return np.argmax(self.Q[state])
+            return np.random.choice(np.flatnonzero(self.Q[state] == self.Q[state].max()))
+            # return np.argmax(self.Q[state])
 
     def update_value_function(self, state: int, reward: float, next_state: int, action: int):
         """update with TD value"""

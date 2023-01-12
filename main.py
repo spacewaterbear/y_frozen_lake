@@ -1,6 +1,7 @@
 import gym
 import time
-from rl_agent.td_agent import TDAgent
+
+from rl_agent.q_td_agent import QTDAgent
 from models.rl_params import Params
 import numpy as np
 import matplotlib.pyplot as plt
@@ -21,18 +22,17 @@ def plot_V(V):
 if __name__ == '__main__':
 
     env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=False)
-    params = Params()
+    params = Params(epsilon=0.8)
     nb_episodes = 1000
-    agent = TDAgent(env=env, params=params)
+    agent = QTDAgent(env=env, params=params)
     for _ in range(nb_episodes):
         done = False
         state = env.reset()
         while not done:
-            action = agent.policy()
+            action = agent.policy(state)
             next_state, reward, done, info = env.step(action)
-            agent.update_value_function(state, reward, next_state)
+            agent.update_value_function(state, reward, next_state, action=action)
             state = next_state
-
     agent.plot()
-    plot_V(agent.V)
+    # plot_V(agent.Q)
 

@@ -14,13 +14,13 @@ class QTDAgent:
 
     def policy(self, state):
         """greedy action always"""
-        if random.random()<self.params.epsilon:
+        if random.random() < self.params.epsilon:
             return self.env.action_space.sample()
         else:
             # return np.random.choice(np.flatnonzero(self.Q[state] == self.Q[state].max()))
             return np.argmax(self.Q[state])
 
-    def update_value_function(self, state:int, reward: float, next_state: int, action: int):
+    def update_value_function(self, state: int, reward: float, next_state: int, action: int):
         """update with TD value"""
         self.Q[state, action] = self.Q[state, action] + self.params.alpha * (reward + self.params.gamma * np.max(self.Q[next_state]) - self.Q[state, action])
 

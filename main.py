@@ -1,11 +1,12 @@
 import gym
-import time
-
-from rl_agent.q_td_agent import QTDAgent
-from models.rl_params import Params
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import seaborn as sns
+
+from models.rl_params import Params
+from rl_agent.q_td_agent import QTDAgent
+
+
 def plot_V(V):
     data = np.array([V[i] for i in range(16)]).reshape(4, 4)
     plt.figure(figsize=(4, 4))
@@ -35,4 +36,3 @@ if __name__ == '__main__':
             state = next_state
     agent.plot()
     # plot_V(agent.Q)
-

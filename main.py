@@ -2,6 +2,20 @@ import gym
 import time
 from rl_agent.td_agent import TDAgent
 from models.rl_params import Params
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+def plot_V(V):
+    data = np.array([V[i] for i in range(16)]).reshape(4, 4)
+    plt.figure(figsize=(4, 4))
+    ax = sns.heatmap(data, linewidth=1, annot=True)
+    ax.set_xticklabels(['L', 'D', 'R', 'U'])
+    ax.set_yticklabels(['L', 'D', 'R', 'U'])
+    ax.set_xlabel('Action')
+    ax.set_ylabel('State')
+
+    plt.title('Value function')
+    plt.show()
 
 
 if __name__ == '__main__':
@@ -20,4 +34,5 @@ if __name__ == '__main__':
             state = next_state
 
     agent.plot()
+    plot_V(agent.V)
 

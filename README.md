@@ -1,3 +1,7 @@
-## RL : Q-Learning on FrozenLake-v1
+## RL : Using Optuna to find out best hyperparamters
 
-This is a simplified implementation of the TD Q-learning algorithm. The code is written in Python 3.9.
+
+Todo : 
+- faire quelques tests avec la librairie
+- faire le code pour maximiser la reward moyenne tout en minimisant le nombre d'épisodes nécessaire à l'entrainement
+- logger les résultats sur weightandbiases

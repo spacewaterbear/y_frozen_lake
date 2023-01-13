@@ -14,13 +14,13 @@ class QMonteCarloAgent:
         self.Q = np.zeros((env.observation_space.n, env.action_space.n))
         self.params = params
         self.history = []
+
     def policy(self, state, greedy=False):
         """greedy action always"""
         if np.random.random() < self.params.epsilon and not greedy:
             return self.env.action_space.sample()
         else:
             return np.random.choice(np.flatnonzero(self.Q[state] == self.Q[state].max()))
-            # return np.argmax(self.Q[state])
 
     def plot(self):
         V = np.max(self.Q, axis=1)

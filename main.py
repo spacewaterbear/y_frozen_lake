@@ -1,15 +1,14 @@
 import gym
 from loguru import logger
-
-from models.rl_params import Params
-from rl_agent.q_monte_carlo_agent import QMonteCarloAgent
-from utils.utils import HelperFunction
+from stable_baselines3 import PPO
+from stable_baselines3.common.evaluation import evaluate_policy
 
 if __name__ == '__main__':
     env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=False)
-    params = Params(epsilon=0.1)
-    nb_episodes = 1000
-    agent = QMonteCarloAgent(env=env, params=params)
-    trained_agent = HelperFunction.train(env=env, agent=agent, nb_episodes=nb_episodes)
-    mean_r, std_r = HelperFunction.eval_trained_agent(env, trained_agent)
-    logger.info(f"{mean_r=}, {std_r}")
+    tims_range = [10, 100, 10000]
+    for ts in tims_range:
+        model = PPO("MlpPolicy", env, verbose=0)
+        model.learn(total_timesteps=ts)
+
+        mean_reward, std_reward = evaluate_policy(model=model, env=model.get_env())
+        logger.info(f"{mean_reward=}, {std_reward} for timestep {ts}")
